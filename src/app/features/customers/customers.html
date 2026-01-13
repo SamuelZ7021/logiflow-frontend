@@ -19,7 +19,7 @@
   <i class="lucide-download"></i> Export
 </button>
 
-<tr *ngFor="let customer of customers" 
+<tr *ngFor="let customer of customers()" 
     (click)="viewCustomerDetails(customer.id)" 
     class="cursor-pointer hover:bg-blue-50/50">
     </tr>
@@ -36,7 +36,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-200">
-        @for (customer of customers; track customer.id) {
+        @for (customer of customers(); track customer.id) {
           <tr class="hover:bg-slate-50 transition-colors">
             <td class="px-6 py-4">
               <div class="flex items-center gap-3">

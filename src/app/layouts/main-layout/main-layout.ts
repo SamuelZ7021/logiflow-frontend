@@ -11,5 +11,6 @@ import { App } from "../../app";
   styleUrl: './main-layout.scss',
 })
 export class MainLayout {
+notify: any;
 
 }
