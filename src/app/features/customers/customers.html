@@ -1,46 +1,109 @@
 <div class="p-6">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold text-slate-900">All Customers</h1>
-    <button (click)="onAddCustomer()"
-    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-      + Add New Customer
-    </button>
+  <div class="flex flex-col gap-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center">
+      <div>
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-1">
+          <span>Home</span>
+          <i class="lucide-chevron-right w-4 h-4"></i>
+          <span class="text-blue-600 font-medium">Customers</span>
+        </nav>
+        <h1 class="text-2xl font-bold text-slate-900">All Customers</h1>
+        <p class="text-slate-500">Manage your client base and view shipment relationships</p>
+      </div>
+      <button (click)="onAddCustomer()"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium">
+        <i class="lucide-plus w-4 h-4"></i> Add New Customer
+      </button>
 
-    @if (isModalOpen()) {
-    <app-add-customer-modal 
-      (close)="toggleModal()" 
-      (save)="handleSaveCustomer($event)">
-    </app-add-customer-modal>
-    }
-  </div>
+      @if (isModalOpen()) {
+      <app-add-customer-modal (close)="toggleModal()" (save)="handleSaveCustomer($event)">
+      </app-add-customer-modal>
+      }
+    </div>
 
-  <button (click)="onExpor()" 
-        class="border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg flex items-center gap-2">
-  <i class="lucide-download"></i> Export
-</button>
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-slate-500 font-medium">Total Clients</span>
+          <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">+5%</span>
+        </div>
+        <div class="text-3xl font-bold text-slate-900">1,240</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-slate-500 font-medium">Active Now</span>
+          <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">+12%</span>
+        </div>
+        <div class="text-3xl font-bold text-slate-900">850</div>
+      </div>
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex justify-between items-start mb-2">
+          <span class="text-slate-500 font-medium">Pending Approval</span>
+          <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full">-2%</span>
+        </div>
+        <div class="text-3xl font-bold text-slate-900">12</div>
+      </div>
+    </div>
 
-<tr *ngFor="let customer of customers()" 
-    (click)="viewCustomerDetails(customer.id)" 
-    class="cursor-pointer hover:bg-blue-50/50">
-    </tr>
+    <!-- Filters Bar -->
+    <div
+      class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap gap-4 items-center justify-between">
+      <div class="relative flex-1 max-w-md">
+        <i class="lucide-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
+        <input type="text" placeholder="Filter customers..."
+          class="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 placeholder:text-slate-400">
+      </div>
+      <div class="flex items-center gap-3">
+        <select
+          class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:border-blue-500 cursor-pointer">
+          <option>All Status</option>
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>Pending</option>
+        </select>
+        <select
+          class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-600 focus:outline-none focus:border-blue-500 cursor-pointer">
+          <option>Region</option>
+          <option>North America</option>
+          <option>Europe</option>
+          <option>Asia</option>
+        </select>
+        <div class="h-8 w-px bg-slate-200 mx-1"></div>
+        <button (click)="onExpor()"
+          class="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 flex items-center gap-2 font-medium">
+          <i class="lucide-download w-4 h-4"></i> Export
+        </button>
+      </div>
+    </div>
 
-  <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-    <table class="w-full text-left">
-      <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 text-sm font-medium">
-        <tr>
-          <th class="px-6 py-4">Client Name</th>
-          <th class="px-6 py-4">ID</th>
-          <th class="px-6 py-4">Primary Contact</th>
-          <th class="px-6 py-4">Active Shipments</th>
-          <th class="px-6 py-4">Status</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-slate-200">
-        @for (customer of customers(); track customer.id) {
-          <tr class="hover:bg-slate-50 transition-colors">
+    <!-- Table -->
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+      <table class="w-full text-left">
+        <thead class="bg-slate-50 border-b border-slate-200">
+          <tr>
+            <th class="px-6 py-4 w-12">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+            </th>
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Client Name</th>
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Primary Contact</th>
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Active Shipments</th>
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-4 w-12"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200">
+          @for (customer of customers(); track customer.id) {
+          <tr class="hover:bg-slate-50 transition-colors cursor-pointer" (click)="viewCustomerDetails(customer.id)">
+            <td class="px-6 py-4" (click)="$event.stopPropagation()">
+              <input type="checkbox" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500">
+            </td>
             <td class="px-6 py-4">
-              <div class="flex items-center gap-3">
-                <div [class]="'w-10 h-10 rounded-lg flex items-center justify-center font-bold ' + customer.color">
+              <div class="flex items-center gap-4">
+                <div
+                  [class]="'w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ' + customer.color">
                   {{ customer.initials }}
                 </div>
                 <div>
@@ -49,21 +112,60 @@
                 </div>
               </div>
             </td>
-            <td class="px-6 py-4 text-slate-600">{{ customer.id }}</td>
-            <td class="px-6 py-4 text-slate-900">{{ customer.contact }}</td>
-            <td class="px-6 py-4 font-medium">{{ customer.activeShipments }}</td>
+            <td class="px-6 py-4 text-sm text-slate-500 font-medium">{{ customer.id }}</td>
+            <td class="px-6 py-4">
+              <div class="flex items-center gap-2">
+                <img [src]="customer.avatar" [alt]="customer.contact" class="w-6 h-6 rounded-full object-cover">
+                <span class="text-sm text-slate-900 font-medium">{{ customer.contact }}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-sm text-slate-900 font-medium">{{ customer.activeShipments }}</td>
             <td class="px-6 py-4">
               <span [class.bg-green-100]="customer.status === 'Active'"
-                    [class.text-green-700]="customer.status === 'Active'"
-                    [class.bg-slate-100]="customer.status === 'Inactive'"
-                    [class.text-slate-700]="customer.status === 'Inactive'"
-                    class="px-3 py-1 rounded-full text-xs font-medium">
+                [class.text-green-700]="customer.status === 'Active'"
+                [class.bg-red-100]="customer.status === 'Inactive'"
+                [class.text-red-700]="customer.status === 'Inactive'"
+                [class.bg-amber-100]="customer.status === 'Pending'"
+                [class.text-amber-700]="customer.status === 'Pending'" class="px-3 py-1 rounded-full text-xs font-bold">
                 {{ customer.status }}
               </span>
             </td>
+            <td class="px-6 py-4" (click)="$event.stopPropagation()">
+              <button class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                <i class="lucide-more-vertical w-4 h-4"></i>
+              </button>
+            </td>
           </tr>
-        }
-      </tbody>
-    </table>
+          }
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="px-6 py-4 border-t border-slate-200 flex items-center justify-between bg-white text-sm">
+        <div class="text-slate-500">
+          Showing <span class="font-bold text-slate-900">1</span> to <span class="font-bold text-slate-900">5</span> of
+          <span class="font-bold text-slate-900">1,240</span> results
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600">
+            <i class="lucide-chevron-left w-4 h-4"></i>
+          </button>
+          <button
+            class="w-8 h-8 flex items-center justify-center bg-blue-50 border border-blue-200 rounded-lg text-blue-600 font-medium">1</button>
+          <button
+            class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-medium">2</button>
+          <button
+            class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-medium">3</button>
+          <span class="text-slate-400 px-1">...</span>
+          <button
+            class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600 font-medium">10</button>
+          <button
+            class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded-lg hover:bg-slate-50 text-slate-600">
+            <i class="lucide-chevron-right w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

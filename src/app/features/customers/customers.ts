@@ -23,7 +23,8 @@ export class Customers {
       activeShipments: 12,
       status: 'Active',
       initials: 'TG',
-      color: 'bg-blue-100 text-blue-600'
+      color: 'bg-blue-100 text-blue-600',
+      avatar: 'assets/avatars/user-02.png'
     },
     {
       id: '#8832',
@@ -33,24 +34,58 @@ export class Customers {
       activeShipments: 0,
       status: 'Inactive',
       initials: 'FM',
-      color: 'bg-orange-100 text-orange-600'
+      color: 'bg-orange-100 text-orange-600',
+      avatar: 'assets/avatars/user-03.png'
+    },
+    {
+      id: '#7712',
+      name: 'Retail King',
+      industry: 'Retail / Global',
+      contact: 'Jessica Pearson',
+      activeShipments: 45,
+      status: 'Pending',
+      initials: 'RK',
+      color: 'bg-purple-100 text-purple-600',
+      avatar: 'assets/avatars/user-04.png'
+    },
+    {
+      id: '#6421',
+      name: 'Ocean Transport',
+      industry: 'Shipping / International',
+      contact: 'Daniel Lee',
+      activeShipments: 8,
+      status: 'Active',
+      initials: 'OT',
+      color: 'bg-cyan-100 text-cyan-600',
+      avatar: 'assets/avatars/user-05.png'
+    },
+    {
+      id: '#5119',
+      name: 'Apex Freight',
+      industry: 'Cargo / Local',
+      contact: 'Emily Chen',
+      activeShipments: 21,
+      status: 'Active',
+      initials: 'AF',
+      color: 'bg-pink-100 text-pink-600',
+      avatar: 'assets/avatars/user-06.png'
     }
   ]);
 
-onAddCustomer(){
+  onAddCustomer() {
     this.notify.show('Opening "Add Customer" modal...')
     this.toggleModal();
   }
 
-  onExpor(){
+  onExpor() {
     this.notify.show('Exporting customers...')
   }
 
-  viewCustomerDetails(id: string){
+  viewCustomerDetails(id: string) {
     this.notify.show(`Viewing details for customer ${id}`)
   }
 
-  
+
 
   toggleModal() {
     this.isModalOpen.update(value => !value);
@@ -67,12 +102,13 @@ onAddCustomer(){
       activeShipments: 0,
       status: data.status,
       initials: data.name.substring(0, 2).toUpperCase(),
-      color: 'bg-purple-100 text-purple-600'
+      color: 'bg-purple-100 text-purple-600',
+      avatar: 'assets/avatars/user-01.png'
     };
 
     // Actualizamos el Signal (esto refresca la tabla automáticamente)
     this.customers.update(current => [...current, newCustomer]);
-    
+
     this.notify.show('Customer created successfully!');
   }
 }

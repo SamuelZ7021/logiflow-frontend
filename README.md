@@ -1,59 +1,49 @@
-# LogiflowFrontend
+# LogiFlow - Logistics Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+LogiFlow is a modern, responsive web application designed for logistics and supply chain management. It provides a comprehensive dashboard for tracking shipments, managing customers, and analyzing operational performance.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+The application consists of several key modules:
 
-```bash
-ng serve
-```
+- **Dashboard**: Real-time overview of active shipments, fleet status, and key performance indicators (KPIs). Includes visual charts and a live fleet map.
+- **Shipments**: Detailed tracking of logistics operations with status monitoring (In Transit, Delivered, Incident, Pending) and filtering capabilities.
+- **Customers**: Client management interface with detailed profiles, shipment history, and quick access actions.
+- **Reports**: Analytical views for shipment volumes, delivery performance, and route efficiency.
+- **Settings**: User configuration for system preferences, notifications, and profile management.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Technology Stack
 
-## Code scaffolding
+- **Framework**: Angular 19+ (Standalone Components, Signals)
+- **Styling**: TailwindCSS
+- **Icons**: Lucide Angular
+- **Build Tool**: Angular CLI
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📦 Installation & Setup
 
-```bash
-ng generate component component-name
-```
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd logiflow-frontend
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```bash
-ng generate --help
-```
+3. **Run the development server**
+   ```bash
+   ng serve
+   ```
+   Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Building
+4. **Build for production**
+   ```bash
+   ng build
+   ```
+   The build artifacts will be stored in the `dist/` directory.
 
-To build the project run:
+## 🧪 Running Tests
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Run `ng test` to execute the unit tests via Karma.
